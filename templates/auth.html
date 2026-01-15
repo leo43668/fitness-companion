@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="landing-container">
+    <div class="landing-content">
+        <!-- Hero Section (Left) -->
+        <div class="hero-section">
+            <div class="ai-badge">🧠 Powered by Emotion AI</div>
+            <h1 class="hero-title">Wellness Meets <span class="highlight">Empathy</span></h1>
+            <p class="hero-subtitle">
+                An emotion-aware AI fitness companion that adapts workouts and support based on how you feel.
+            </p>
+
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-text">
+                        <strong>Emotional Intelligence</strong>
+                        <span>Detects if you're stressed, tired, or motivated.</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧘</div>
+                    <div class="feature-text">
+                        <strong>Adaptive Workouts</strong>
+                        <span>Get recommendations that match your energy level.</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🗣️</div>
+                    <div class="feature-text">
+                        <strong>Voice Interaction</strong>
+                        <span>Just talk. Your companion listens and speaks back.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Section (Right) -->
+        <div class="auth-section">
+            <div class="auth-box">
+                <h2 id="form-title">Start Your Fitness Journey</h2>
+
+                <!-- Login Form -->
+                <form id="login-form" method="POST" action="{{ url_for('login') }}">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" name="action" value="login" class="btn primary-btn">Enter Fitness AI</button>
+
+                    <div class="auth-switch">
+                        New here? <a href="#" onclick="toggleAuth(event)">Create an Account</a>
+                    </div>
+                </form>
+
+                <!-- Signup Form (Hidden by default) -->
+                <form id="signup-form" method="POST" action="{{ url_for('login') }}" style="display: none;">
+                    <div class="form-group">
+                        <label>Choose Username</label>
+                        <input type="text" name="username" placeholder="Choose a username" required disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Choose Password</label>
+                        <input type="password" name="password" placeholder="Choose a strong password" required disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" name="confirm_password" placeholder="Confirm your password" required
+                            disabled>
+                    </div>
+
+                    <button type="submit" name="action" value="signup" class="btn primary-btn">Start Your
+                        Journey</button>
+
+                    <div class="auth-switch">
+                        Already have an account? <a href="#" onclick="toggleAuth(event)">Log In</a>
+                    </div>
+                </form>
+
+                <!-- Trust Footer (Inside Box) -->
+                <div class="trust-footer">
+                    <div class="trust-item">🔒 Secure</div>
+                    <div class="trust-item">⚕️ No Medical Advice</div>
+                    <div class="trust-item">🎓 Research</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animated Waves Footer -->
+    <div class="waves-footer">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(79, 70, 229, 0.1)" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(79, 70, 229, 0.2)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(79, 70, 229, 0.05)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255, 255, 255, 0.4)" />
+            </g>
+        </svg>
+    </div>
+</div>
+
+<script>
+    // Copying the toggle script from before
+    function toggleAuth(e) {
+        e.preventDefault();
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const title = document.getElementById('form-title');
+
+        if (loginForm.style.display === 'none') {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+            title.textContent = 'Welcome Back';
+            Array.from(loginForm.elements).forEach(el => el.disabled = false);
+            Array.from(signupForm.elements).forEach(el => el.disabled = true);
+        } else {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+            title.textContent = 'Create Account';
+            Array.from(loginForm.elements).forEach(el => el.disabled = true);
+            Array.from(signupForm.elements).forEach(el => el.disabled = false);
+        }
+    }
+</script>
+{% endblock %}

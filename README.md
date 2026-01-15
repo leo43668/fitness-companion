@@ -1,1 +1,1 @@
-# fitness-companion
+# empathetic-fitness-companion

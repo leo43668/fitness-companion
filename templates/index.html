@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-container">
+    <header class="chat-header">
+        <div class="header-left">
+            <div class="status-indicator">
+                <span class="dot"></span> Online
+            </div>
+        </div>
+        <div class="emotion-pill" id="emotion-display" style="display: none;">
+            <span id="emotion-icon">😐</span>
+            <span id="emotion-label">Neutral</span>
+        </div>
+    </header>
+
+    <main class="chat-area" id="chat-container">
+        <div class="message bot-message">
+            <div class="message-content">
+                Hello {{ current_user.username }}! I'm your empathetic fitness companion. How are you feeling about your
+                workout today?
+            </div>
+        </div>
+        <!-- Messages will be injected here -->
+    </main>
+
+    <footer class="input-area">
+        <div class="input-wrapper">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off">
+            <button id="mic-btn" type="button" title="Speak">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                    <line x1="8" y1="23" x2="16" y2="23"></line>
+                </svg>
+            </button>
+            <button id="send-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+        <p class="disclaimer-text">AI is not a medical professional.</p>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header-card">
+        <div class="profile-avatar">
+            {{ current_user.username[0] | upper }}
+        </div>
+        <div class="profile-info">
+            <h2>{{ current_user.username }}</h2>
+            <p class="member-badge">✨ Fitness Enthusiast</p>
+        </div>
+        <div class="profile-stat-box">
+            <div class="stat-value">{{ current_user.streak_count }}</div>
+            <div class="stat-label">Day Streak</div>
+        </div>
+    </div>
+
+    <div class="settings-card">
+        <h3>Personalize Your Experience</h3>
+        <p class="section-desc">Help your AI companion understand your goals to provide better advice.</p>
+
+        <form method="POST" action="{{ url_for('profile') }}">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Fitness Goal</label>
+                    <select name="fitness_goal">
+                        <option value="general_fitness" {% if current_user.fitness_goal=='general_fitness' %}selected{%
+                            endif %}>General Fitness</option>
+                        <option value="weight_loss" {% if current_user.fitness_goal=='weight_loss' %}selected{% endif
+                            %}>Weight Loss</option>
+                        <option value="muscle_gain" {% if current_user.fitness_goal=='muscle_gain' %}selected{% endif
+                            %}>Muscle Gain</option>
+                        <option value="stress_relief" {% if current_user.fitness_goal=='stress_relief' %}selected{%
+                            endif %}>Stress Relief</option>
+                        <option value="endurance" {% if current_user.fitness_goal=='endurance' %}selected{% endif %}>
+                            Endurance Training</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Workout Time</label>
+                    <select name="workout_time">
+                        <option value="morning" {% if current_user.workout_time=='morning' %}selected{% endif %}>Morning
+                            (6AM - 12PM)</option>
+                        <option value="afternoon" {% if current_user.workout_time=='afternoon' %}selected{% endif %}>
+                            Afternoon (12PM - 5PM)</option>
+                        <option value="evening" {% if current_user.workout_time=='evening' %}selected{% endif %}>Evening
+                            (5PM - 10PM)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary-btn">Save Preferences</button>
+        </form>
+    </div>
+
+    <div class="account-actions">
+        <a href="{{ url_for('logout') }}" class="btn secondary-btn logout-btn">Log Out</a>
+    </div>
+</div>
+{% endblock %}
